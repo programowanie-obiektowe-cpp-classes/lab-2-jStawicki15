@@ -30,9 +30,10 @@ class ResourceManager
         delete resource_;
     }
     //Kopiowanie
-    ResourceManager& operator=(const ResourceManager& oryginal)
+    ResourceManager operator=(const ResourceManager& oryginal)
     {
-        this->resource_ = oryginal.resource_;
+        delete resource_;
+        resource_ = oryginal.resource_;
         return *this;
     }
     //Przenoszenie
