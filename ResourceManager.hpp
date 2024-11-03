@@ -14,10 +14,15 @@ class ResourceManager
     }
 
     //Metody Specjalne
-    //Konstruktor
+    //Konstruktor domyślny
     ResourceManager()
     {
         resource_ = new Resource();
+    }
+    //Konstruktor kopiujący???
+    ResourceManager(const ResourceManager& oryginal)
+    {
+        resource_ = oryginal.resource_;
     }
     //Destruktor
     ~ResourceManager()
@@ -25,7 +30,7 @@ class ResourceManager
         delete resource_;
     }
     //Kopiowanie
-    ResourceManager& operator=(ResourceManager& oryginal)
+    ResourceManager operator=(const ResourceManager& oryginal)
     {
         this->resource_ = oryginal.resource_;
     }
