@@ -1,11 +1,11 @@
 #pragma once
-
+//#include<iostream>
 #include "Resource.hpp"
 
 class ResourceManager
 {
     private:
-    Resource* resource_;
+    Resource* resource_ = nullptr;
     
     public:
     double get()
@@ -20,20 +20,19 @@ class ResourceManager
         resource_ = new Resource();
     }
     //Konstruktor kopiujący???
-    ResourceManager(const ResourceManager& oryginal)
-    {
-        resource_ = oryginal.resource_;
-    }
+    ResourceManager(const ResourceManager& oryginal) : resource_{oryginal.resource_} {}
+    //{std::cout<<"Konstruktor kopiujacy wywolany";}
     //Destruktor
     ~ResourceManager()
     {
         delete resource_;
     }
     //Kopiowanie
-    ResourceManager operator=(const ResourceManager& oryginal)
+    ResourceManager& operator=(const ResourceManager& oryginal)
     {
         delete resource_;
         resource_ = oryginal.resource_;
+        //std::cout<<"Kopiowanie wywolane";
         return *this;
     }
     //Przenoszenie
