@@ -30,8 +30,7 @@ class ResourceManager
     //Kopiowanie
     ResourceManager& operator=(const ResourceManager& oryginal)
     {
-        delete resource_;
-        resource_ = oryginal.resource_;
+        this->resource_ = oryginal.resource_;
         //std::cout<<"Kopiowanie wywolane";
         return *this;
     }
