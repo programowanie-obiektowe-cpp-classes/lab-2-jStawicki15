@@ -17,10 +17,10 @@ class ResourceManager
     //Konstruktor domyślny
     ResourceManager()
     {
-        resource_ = new Resource();
+        resource_ = new Resource{};
     }
     //Konstruktor kopiujący???
-    ResourceManager(const ResourceManager& oryginal) : resource_{oryginal.resource_} {}
+    ResourceManager(const ResourceManager& oryginal) : resource_{new Resource{*oryginal.resource_}} {}
     //{std::cout<<"Konstruktor kopiujacy wywolany";}
     //Destruktor
     ~ResourceManager()
@@ -30,7 +30,11 @@ class ResourceManager
     //Kopiowanie
     ResourceManager& operator=(const ResourceManager& oryginal)
     {
-        this->resource_ = oryginal.resource_;
+        if(this == &oryginal)
+            return *this;
+        
+        delete resource_;
+        resource_ = new Resource{*oryginal.resource_};
         //std::cout<<"Kopiowanie wywolane";
         return *this;
     }
