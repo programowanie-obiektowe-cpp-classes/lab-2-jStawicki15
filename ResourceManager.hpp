@@ -13,7 +13,7 @@ class ResourceManager
         return resource_->get();
     }
 
-    //Metody Specjalne
+    //Metody Specjalne!!!
     //Konstruktor domyślny
     ResourceManager()
     {
@@ -38,5 +38,21 @@ class ResourceManager
         //std::cout<<"Kopiowanie wywolane";
         return *this;
     }
+    //Konstruktor przenoszacy
+    ResourceManager(ResourceManager&& oryginal) noexcept
+    : resource_{oryginal.resource_}
+    {
+        oryginal.resource_ = nullptr;
+    }
     //Przenoszenie
+    ResourceManager& operator=(ResourceManager&& oryginal) noexcept
+    {
+        if(this != &oryginal)
+        {
+            delete resource_;
+            resource_ = oryginal.resource_;
+            oryginal.resource_ = nullptr;
+        }
+        return *this;
+    }
 };
